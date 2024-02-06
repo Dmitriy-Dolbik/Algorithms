@@ -30,16 +30,15 @@ public class DuplicateRemover {
         if (n < 1) {
             return;
         }
-        char[] firstReadContent = readLine();
-        writeLine(firstReadContent);
-        char[] previousContent = firstReadContent;
-        char[] newReadContent;
+        char[] readContent = readLine();
+        writeLine(readContent);
+        char[] previousContent = readContent;
 
-        for (int i = 0; i < n; i++) {
-            newReadContent = readLine();
-            if (!equals(newReadContent, previousContent)) {
-                writeLine(newReadContent);
-                previousContent = newReadContent;
+        for (int i = 1; i < n; i++) {
+            readContent = readLine();
+            if (!equals(readContent, previousContent)) {
+                writeLine(readContent);
+                previousContent = readContent;
             }
         }
     }
@@ -69,7 +68,7 @@ public class DuplicateRemover {
         bufferedWriter.newLine();
     }
 
-    private static boolean equals(char[] chars1, char[] chars2) {
+    private static boolean equals(char[] chars1, char[] chars2) throws IOException {
         for (int i = 0; i < MAX_CHAR_ARRAY_SIZE; ++i) {
             if (chars1[i] != chars2[i]) {
                 return false;
