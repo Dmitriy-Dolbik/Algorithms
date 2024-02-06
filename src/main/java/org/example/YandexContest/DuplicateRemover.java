@@ -1,4 +1,4 @@
-package org.example.YandexContest.duplicateRemover;
+package org.example.YandexContest;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
