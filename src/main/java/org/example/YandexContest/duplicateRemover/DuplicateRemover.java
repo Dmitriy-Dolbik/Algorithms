@@ -11,7 +11,7 @@ public class DuplicateRemover {
     private static final String FILE_OUTPUT = "output.txt";
     private static BufferedReader bufferedReader = null;
     private static BufferedWriter bufferedWriter = null;
-    private static int MAX_CHAR_ARRAY_SIZE = 15;
+    private static final int MAX_CHAR_ARRAY_SIZE = 15;
 
     public static void main(String[] args) throws Exception {
         init();
@@ -68,7 +68,7 @@ public class DuplicateRemover {
         bufferedWriter.newLine();
     }
 
-    private static boolean equals(char[] chars1, char[] chars2) throws IOException {
+    private static boolean equals(char[] chars1, char[] chars2) {
         for (int i = 0; i < MAX_CHAR_ARRAY_SIZE; ++i) {
             if (chars1[i] != chars2[i]) {
                 return false;
