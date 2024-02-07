@@ -9,8 +9,8 @@ import java.io.IOException;
 public class DuplicateRemover {
     private static final String FILE_INPUT = "input.txt";
     private static final String FILE_OUTPUT = "output.txt";
-    private static BufferedReader bufferedReader = null;
-    private static BufferedWriter bufferedWriter = null;
+    private static BufferedReader bufferedReader;
+    private static BufferedWriter bufferedWriter;
     private static final int MAX_CHAR_ARRAY_SIZE = 15;
 
     public static void main(String[] args) throws Exception {
@@ -25,16 +25,16 @@ public class DuplicateRemover {
     }
 
     private static void run() throws IOException {
-        int n = Integer.parseInt(String.valueOf(readLine()).trim());//читаем одну строку (или её часть. если строка большая), как массив символов. Убираем пробелы из
+        int numberOfContentLines = Integer.parseInt(String.valueOf(readLine()).trim());//читаем одну строку (или её часть. если строка большая), как массив символов. Убираем пробелы из
         // строки
-        if (n < 1) {
+        if (numberOfContentLines < 1) {
             return;
         }
         char[] readContent = readLine();
         writeLine(readContent);
         char[] previousContent = readContent;
 
-        for (int i = 1; i < n; i++) {
+        for (int i = 1; i < numberOfContentLines; i++) {
             readContent = readLine();
             if (!equals(readContent, previousContent)) {
                 writeLine(readContent);
