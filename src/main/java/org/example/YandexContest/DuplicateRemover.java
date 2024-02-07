@@ -6,6 +6,18 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Дан упорядоченный по неубыванию массив целых 32-разрядных чисел. Требуется удалить из него все повторения.
+ * Желательно получить решение, которое не считывает входной файл целиком в память, т.е., использует лишь константный объем памяти в процессе работы.
+ * Input 	Output
+ * 5        2
+ * 2        4
+ * 4        8
+ * 8
+ * 8
+ * 8
+ * https://contest.yandex.ru/contest/8458/problems/C/?success=106776507#1037/2018_06_27/PCZWie3Bt7
+ */
 public class DuplicateRemover {
     private static final String FILE_INPUT = "input.txt";
     private static final String FILE_OUTPUT = "output.txt";
