@@ -22,7 +22,7 @@ public class BracketsGenerator {
 //        placeBracketToArray(bracketsDifference, bracketIndex, bracketsNumber, bracketsArray);
 
         //Итеративный способ решения
-        int bracketsNumber = 8; // количество скобок, должно быть четное
+        int bracketsNumber = 6; // количество скобок, должно быть четное
         char[] bracketsArray = new char[bracketsNumber];
         Arrays.fill(bracketsArray, 0, bracketsNumber/2, '(');
         Arrays.fill(bracketsArray, bracketsNumber/2, bracketsNumber, ')');
@@ -31,21 +31,20 @@ public class BracketsGenerator {
     }
 
     public static void replaceBrackets(int bracketsNumber, char[] bracketsArray) {
-        int neededCountOfOpenedBracket = bracketsNumber/2;
         // печатаем нулевую последовательность
         System.out.println(Arrays.toString(bracketsArray));
         while (true) {
             int bracketIndex = bracketsNumber - 1;
-            int bracketsBalance = 0;
+            int bracketsDifference = 0;
             // находим откр. скобку, которую можно заменить
             while (bracketIndex >= 0) { //ищем с последнего элемента
                 if (bracketsArray[bracketIndex] == ')') {
-                    bracketsBalance--;//достаем из стека открывающую скобку
+                    bracketsDifference--;//достаем из стека открывающую скобку
                 }
                 if (bracketsArray[bracketIndex] == '(') {
-                    bracketsBalance++;
+                    bracketsDifference++;
                 }
-                if (bracketsBalance <  0 && bracketsArray[bracketIndex] == '(') {//останавливаем поиск, если закрывающих скобор больше, чем открывабщих
+                if (bracketsDifference <  0 && bracketsArray[bracketIndex] == '(') {//останавливаем поиск, если закрывающих скобор больше, чем открывабщих
                     break;
                 }
                 bracketIndex--;
@@ -57,11 +56,9 @@ public class BracketsGenerator {
             // заменяем на закр. скобку
             bracketsArray[bracketIndex] = ')';
             // заменяем на самую лексикографическую минимальную
-            int countOfOpenedBracket = Math.abs(bracketsBalance);
             for (int i = bracketIndex + 1; i < bracketsNumber; i++) {
-                if (countOfOpenedBracket < neededCountOfOpenedBracket && i != bracketsNumber - 1) {
+                if (i <= (bracketsNumber - bracketIndex + bracketsDifference) / 2 + bracketIndex) {
                     bracketsArray[i] = '(';
-                    countOfOpenedBracket++;
                 } else {
                     bracketsArray[i] = ')';
                 }
