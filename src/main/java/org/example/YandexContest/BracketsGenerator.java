@@ -29,6 +29,7 @@ public class BracketsGenerator {
     public static final String FILE_OUTPUT = "output.txt";
     private static BufferedReader bufferedReader;
     private static BufferedWriter bufferedWriter;
+    private static final int MAX_ARRAY_SIZE = 15;
 
 
     public static void main(String[] args) throws IOException {
@@ -37,13 +38,18 @@ public class BracketsGenerator {
         close();
     }
 
+    private static void init() throws IOException {
+        bufferedReader = new BufferedReader(new FileReader(FILE_INPUT));
+        bufferedWriter = new BufferedWriter(new FileWriter(FILE_OUTPUT));
+    }
+
     private static void close() throws IOException {
         bufferedReader.close();
         bufferedWriter.close();
     }
 
     private static void run() throws IOException {
-        int inputValue = Integer.parseInt(String.valueOf(readLine()));
+        int inputValue = Integer.parseInt(String.valueOf(readLine()).trim());
         int bracketsNumber = inputValue * 2; // количество скобок, должно быть четное
         char[] bracketsArray = new char[bracketsNumber];
         Arrays.fill(bracketsArray, 0, bracketsNumber, '(');
@@ -52,14 +58,20 @@ public class BracketsGenerator {
         replaceBrackets(bracketsNumber, bracketsArray);
     }
 
-    private static char readLine() throws IOException {
-        int readCharacter = bufferedReader.read();
-        return (char) readCharacter;
-    }
+    private static char[] readLine() throws IOException {
+        char[] readCharArray = new char[MAX_ARRAY_SIZE];
+        for (int i = 0; i < MAX_ARRAY_SIZE; i++) {
+            int readCharacter = bufferedReader.read();
+            if (readCharacter == '\n' || readCharacter == -1) {
+                break;
+            }
+            if (readCharacter == '\r') {
+                continue;
+            }
+            readCharArray[i] = (char) readCharacter;
+        }
+        return readCharArray;
 
-    private static void init() throws IOException {
-        bufferedReader = new BufferedReader(new FileReader(FILE_INPUT));
-        bufferedWriter = new BufferedWriter(new FileWriter(FILE_OUTPUT));
     }
 
     public static void replaceBrackets(int bracketsNumber, char[] bracketsArray) throws IOException {
