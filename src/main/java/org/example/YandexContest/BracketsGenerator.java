@@ -1,17 +1,22 @@
 package org.example.YandexContest;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
- *          ((()))
- *            )(
- *          (()())
- *             )(
- *          (())()
- *           )(()
- *          ()(())
- *             )(
- *          ()()()
+ * ((()))
+ * )(
+ * (()())
+ * )(
+ * (())()
+ * )(()
+ * ()(())
+ * )(
+ * ()()()
  * ..................
  * [(, (, (, ), ), )]
  * [(, (, ), (, ), )]
@@ -20,40 +25,60 @@ import java.util.Arrays;
  * [(, ), (, ), (, )]
  */
 public class BracketsGenerator {
-    public static void main(String[] args) {
-        //Рекурсивный способ
-//        int bracketsNumber = 6; // количество скобок
-//        char[] bracketsArray = new char[bracketsNumber]; // пустой массив, куда кладем скобки
-//        int bracketsDifference = 0; // разница между скобками
-//        int bracketIndex = 0; // индекс, по которому кладем скобку в список
-//
-//        placeBracketToArray(bracketsDifference, bracketIndex, bracketsNumber, bracketsArray);
+    public static final String FILE_INPUT = "input.txt";
+    public static final String FILE_OUTPUT = "output.txt";
+    private static BufferedReader bufferedReader;
+    private static BufferedWriter bufferedWriter;
 
-        //Итеративный способ решения
-        int bracketsNumber = 8; // количество скобок, должно быть четное
+
+    public static void main(String[] args) throws IOException {
+        init();
+        run();
+        close();
+    }
+
+    private static void close() throws IOException {
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+
+    private static void run() throws IOException {
+        int inputValue = Integer.parseInt(String.valueOf(readLine()));
+        int bracketsNumber = inputValue * 2; // количество скобок, должно быть четное
         char[] bracketsArray = new char[bracketsNumber];
-        Arrays.fill(bracketsArray, 0, bracketsNumber/2, '(');
-        Arrays.fill(bracketsArray, bracketsNumber/2, bracketsNumber, ')');
+        Arrays.fill(bracketsArray, 0, bracketsNumber, '(');
+        Arrays.fill(bracketsArray, bracketsNumber / 2, bracketsNumber, ')');
 
         replaceBrackets(bracketsNumber, bracketsArray);
     }
 
-    public static void replaceBrackets(int bracketsNumber, char[] bracketsArray) {
-        int count = 0;
+    private static char readLine() throws IOException {
+        int readCharacter = bufferedReader.read();
+        return (char) readCharacter;
+    }
+
+    private static void init() throws IOException {
+        bufferedReader = new BufferedReader(new FileReader(FILE_INPUT));
+        bufferedWriter = new BufferedWriter(new FileWriter(FILE_OUTPUT));
+    }
+
+    public static void replaceBrackets(int bracketsNumber, char[] bracketsArray) throws IOException {
         // печатаем нулевую последовательность
-        System.out.println(++count + Arrays.toString(bracketsArray));
+        writeLine(bracketsArray);
         while (true) {
             int bracketIndex = bracketsNumber - 1;
-            int bracketsDifference = 0;
+            int openedBrackets = 0;
+            int closedBrackets = 0;
             // находим откр. скобку, которую можно заменить
             while (bracketIndex >= 0) { //ищем с последнего элемента
                 if (bracketsArray[bracketIndex] == ')') {
-                    bracketsDifference--;//достаем из стека открывающую скобку
+                    closedBrackets++;
                 }
                 if (bracketsArray[bracketIndex] == '(') {
-                    bracketsDifference++;
+                    openedBrackets++;
                 }
-                if (bracketsDifference <  0 && bracketsArray[bracketIndex] == '(') {//останавливаем поиск, если закрывающих скобор больше, чем открывабщих
+                if (openedBrackets - closedBrackets < 0 && openedBrackets > 0 && bracketsArray[bracketIndex] == '(') {//останавливаем поиск, если закрывающих скобор
+                    // больше, чем открывабщих
                     break;
                 }
                 bracketIndex--;
@@ -65,41 +90,21 @@ public class BracketsGenerator {
             // заменяем на закр. скобку
             bracketsArray[bracketIndex] = ')';
             // заменяем на самую лексикографическую минимальную
-            int countOfLeftOpenedBrackets;
-            if (bracketIndex < bracketsNumber/2) {
-                countOfLeftOpenedBrackets = bracketIndex;
-            } else {
-                countOfLeftOpenedBrackets = bracketsNumber/2 - 1;
-            }
             for (int i = bracketIndex + 1; i < bracketsNumber; i++) {
-                if (countOfLeftOpenedBrackets < bracketsNumber/2) {
+                if (openedBrackets > 0) {
                     bracketsArray[i] = '(';
-                    countOfLeftOpenedBrackets++;
+                    openedBrackets--;
                 } else {
                     bracketsArray[i] = ')';
                 }
             }
-            System.out.println(++count + Arrays.toString(bracketsArray));
+            writeLine(bracketsArray);
         }
 
     }
 
-    public static void placeBracketToArray(int bracketsDifference, int bracketIndex, int bracketsNumber, char[] bracketsArray) {
-        // кладем откр. скобку, только если хватает места
-        if (bracketsDifference <= bracketsNumber - bracketIndex - 2) {
-            bracketsArray[bracketIndex] = '(';
-            placeBracketToArray(bracketsDifference + 1, bracketIndex + 1, bracketsNumber, bracketsArray);
-        }
-        // закр. скобку можно положить всегда, если bracketsDifference > 0
-        if (bracketsDifference > 0) {
-            bracketsArray[bracketIndex] = ')';
-            placeBracketToArray(bracketsDifference - 1, bracketIndex + 1, bracketsNumber, bracketsArray);
-        }
-        // выходим из цикла и печатаем
-        if (bracketIndex == bracketsNumber) {
-            if (bracketsDifference == 0) {
-                System.out.println(Arrays.toString(bracketsArray));
-            }
-        }
+    private static void writeLine(char[] bracketsArray) throws IOException {
+        bufferedWriter.write(bracketsArray);
+        bufferedWriter.newLine();
     }
 }
