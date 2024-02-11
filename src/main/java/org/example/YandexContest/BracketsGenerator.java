@@ -30,7 +30,7 @@ public class BracketsGenerator {
 //        placeBracketToArray(bracketsDifference, bracketIndex, bracketsNumber, bracketsArray);
 
         //Итеративный способ решения
-        int bracketsNumber = 6; // количество скобок, должно быть четное
+        int bracketsNumber = 8; // количество скобок, должно быть четное
         char[] bracketsArray = new char[bracketsNumber];
         Arrays.fill(bracketsArray, 0, bracketsNumber/2, '(');
         Arrays.fill(bracketsArray, bracketsNumber/2, bracketsNumber, ')');
@@ -39,8 +39,9 @@ public class BracketsGenerator {
     }
 
     public static void replaceBrackets(int bracketsNumber, char[] bracketsArray) {
+        int count = 0;
         // печатаем нулевую последовательность
-        System.out.println(Arrays.toString(bracketsArray));
+        System.out.println(++count + Arrays.toString(bracketsArray));
         while (true) {
             int bracketIndex = bracketsNumber - 1;
             int bracketsDifference = 0;
@@ -64,14 +65,21 @@ public class BracketsGenerator {
             // заменяем на закр. скобку
             bracketsArray[bracketIndex] = ')';
             // заменяем на самую лексикографическую минимальную
+            int countOfLeftOpenedBrackets;
+            if (bracketIndex < bracketsNumber/2) {
+                countOfLeftOpenedBrackets = bracketIndex;
+            } else {
+                countOfLeftOpenedBrackets = bracketsNumber/2 - 1;
+            }
             for (int i = bracketIndex + 1; i < bracketsNumber; i++) {
-                if (i <= (bracketsNumber - bracketIndex + bracketsDifference) / 2 + bracketIndex) {
+                if (countOfLeftOpenedBrackets < bracketsNumber/2) {
                     bracketsArray[i] = '(';
+                    countOfLeftOpenedBrackets++;
                 } else {
                     bracketsArray[i] = ')';
                 }
             }
-            System.out.println(Arrays.toString(bracketsArray));
+            System.out.println(++count + Arrays.toString(bracketsArray));
         }
 
     }
