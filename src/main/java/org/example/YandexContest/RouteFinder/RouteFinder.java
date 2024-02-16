@@ -1,4 +1,4 @@
-package org.example.YandexContest;
+package org.example.YandexContest.RouteFinder;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,8 +11,8 @@ import java.util.Queue;
 import java.util.Set;
 
 /**
- *
  * https://contest.yandex.ru/contest/8458/problems/G/
+ * (не проходит 15-й тест, почему не понятно. Вроде все правильно)
  */
 
 public class RouteFinder {
@@ -43,11 +43,12 @@ public class RouteFinder {
         int toCityIndex = Integer.parseInt(fromCityAndToCity[1]);
 
         if (fromCityIndex == toCityIndex) {
-            bufferedWriter.write(0);
+            bufferedWriter.write(String.valueOf(-1));
         }
         bufferedWriter.write(String.valueOf(bfs(fromCityIndex, toCityIndex, countOfCities, citiesWithXY, maxDistance)).trim());
     }
 
+    //поиск в ширину
     public static int bfs(int fromCityIndex, int toCityIndex, int countOfCities, int[][] citiesWithXY, int maxDistance) {
         Set<Integer> visitedCities = new HashSet<>();
         Queue<int[]> cityAndCountOfRoads = new LinkedList<>();
