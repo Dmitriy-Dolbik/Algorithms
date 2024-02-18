@@ -10,17 +10,12 @@ public class DuplicateDetector {
 
     public static boolean containsDuplicate(int[] nums) {
         Map<Integer, Integer> numbersAndTheirCounts = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int number = nums[i];
-            if (numbersAndTheirCounts.containsKey(number)) {
-                int countOfNumbers = numbersAndTheirCounts.get(number);
-                if (countOfNumbers >= 1) {
-                    return true;
-                }
-                numbersAndTheirCounts.put(number, countOfNumbers + 1);
-            } else {
-                numbersAndTheirCounts.put(number, 1);
+        for (int number : nums) {
+            int countOfNumbers = numbersAndTheirCounts.getOrDefault(number, 0);
+            if (countOfNumbers >= 1) {
+                return true;
             }
+            numbersAndTheirCounts.put(number, countOfNumbers + 1);
         }
         return false;
     }
