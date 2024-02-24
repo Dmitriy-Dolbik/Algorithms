@@ -10,6 +10,10 @@ public class ValidAnagram implements Task {
     }
 
     public static boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+
         char[] firstString = s.toCharArray();
         char[] secondString = t.toCharArray();
 
@@ -58,6 +62,10 @@ public class ValidAnagram implements Task {
 
     @Override
     public void getOptimizeSolution() {
+//        if (s.length() != t.length()) {
+//            return false;
+//        }
+
 //        char[] firstString = s.toCharArray();
 //        char[] secondString = t.toCharArray();
 //
