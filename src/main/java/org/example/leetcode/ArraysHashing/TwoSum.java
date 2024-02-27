@@ -1,10 +1,12 @@
-package org.example.leetcode;
+package org.example.leetcode.ArraysHashing;
+
+import org.example.leetcode.Task;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TwoSum implements Task{
+public class TwoSum implements Task {
 
     public static void main(String[] args) {
         System.out.println(Arrays.toString(twoSum(new int[]{3, 2, 4}, 6)));

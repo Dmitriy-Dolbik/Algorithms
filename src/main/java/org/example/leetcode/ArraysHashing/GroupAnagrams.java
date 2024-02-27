@@ -1,4 +1,6 @@
-package org.example.leetcode;
+package org.example.leetcode.ArraysHashing;
+
+import org.example.leetcode.Task;
 
 import java.util.ArrayList;
 import java.util.Arrays;

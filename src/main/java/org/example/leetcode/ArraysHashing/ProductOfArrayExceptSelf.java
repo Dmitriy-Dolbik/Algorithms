@@ -1,4 +1,6 @@
-package org.example.leetcode;
+package org.example.leetcode.ArraysHashing;
+
+import org.example.leetcode.Task;
 
 public class ProductOfArrayExceptSelf implements Task {
     public int[] productExceptSelf(int[] nums) {

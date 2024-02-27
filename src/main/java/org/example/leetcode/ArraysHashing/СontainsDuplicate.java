@@ -1,4 +1,4 @@
-package org.example.leetcode.duplicates;
+package org.example.leetcode.ArraysHashing;
 
 import org.example.leetcode.Task;
 
