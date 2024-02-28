@@ -3,6 +3,7 @@ package org.example.leetcode.Stack;
 import org.example.leetcode.Task;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MinStack implements Task {
@@ -24,8 +25,8 @@ public class MinStack implements Task {
         minStack.getMin();
     }
 
-    private List<Integer> valuesList = new ArrayList<>();
-    private List<Integer> minValuesList = new ArrayList<>();
+    private LinkedList<Integer> valuesList = new LinkedList<>();
+    private LinkedList<Integer> minValuesList = new LinkedList<>();
 
     public MinStack() {
 
@@ -37,29 +38,22 @@ public class MinStack implements Task {
     }
 
     private int updateMinValue(int val) {
-        int minValue;
-        if (minValuesList.isEmpty()) {
-            minValue = val;
-        } else {
-            int topOfMinValuesList = minValuesList.get(minValuesList.size() - 1);
-            minValue = Math.min(val, topOfMinValuesList);
-        }
+        int minValue = minValuesList.isEmpty() ? val : Math.min(val, minValuesList.getLast());
         minValuesList.add(minValue);
         return minValue;
     }
 
     public void pop() {
-        valuesList.remove(valuesList.size() - 1);
-        minValuesList.remove(minValuesList.size() - 1);
+        valuesList.removeLast();
+        minValuesList.removeLast();
     }
 
     public int top() {
-        return valuesList.get(valuesList.size() - 1);
+        return valuesList.getLast();
     }
 
     public int getMin() {
-        return minValuesList.get(minValuesList.size() - 1);
-
+        return minValuesList.getLast();
     }
 
     @Override
@@ -73,8 +67,8 @@ public class MinStack implements Task {
 
     @Override
     public void getOptimizeSolution() {
-//        private List<Integer> valuesList = new ArrayList<>();
-//        private List<Integer> minValuesList = new ArrayList<>();
+//        private LinkedList<Integer> valuesList = new LinkedList<>();
+//        private LinkedList<Integer> minValuesList = new LinkedList<>();
 //
 //        public MinStack() {
 //
@@ -86,29 +80,22 @@ public class MinStack implements Task {
 //        }
 //
 //        private int updateMinValue(int val) {
-//            int minValue;
-//            if (minValuesList.isEmpty()) {
-//                minValue = val;
-//            } else {
-//                int topOfMinValuesList = minValuesList.get(minValuesList.size() - 1);
-//                minValue = Math.min(val, topOfMinValuesList);
-//            }
+//            int minValue = minValuesList.isEmpty() ? val : Math.min(val, minValuesList.getLast());
 //            minValuesList.add(minValue);
 //            return minValue;
 //        }
 //
 //        public void pop() {
-//            valuesList.remove(valuesList.size() - 1);
-//            minValuesList.remove(minValuesList.size() - 1);
+//            valuesList.removeLast();
+//            minValuesList.removeLast();
 //        }
 //
 //        public int top() {
-//            return valuesList.get(valuesList.size() - 1);
+//            return valuesList.getLast();
 //        }
 //
 //        public int getMin() {
-//            return minValuesList.get(minValuesList.size() - 1);
-//
+//            return minValuesList.getLast();
 //        }
     }
 
