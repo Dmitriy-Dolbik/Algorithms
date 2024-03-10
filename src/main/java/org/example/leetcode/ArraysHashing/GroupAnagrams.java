@@ -10,7 +10,11 @@ import java.util.Map;
 
 public class GroupAnagrams implements Task {
 
-    public List<List<String>> groupAnagrams(String[] strs) {
+    public static void main(String[] args) {
+         groupAnagrams(new String[]{"eaaaat","tea","tan","ate","nat","bat"});
+    }
+
+    public static List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> anagramGroups = new HashMap<>();
         for (String str : strs) {
             String countsOfCharacters = String.valueOf(getCountsOfCharacters(str));
@@ -19,7 +23,7 @@ public class GroupAnagrams implements Task {
         return new ArrayList<>(anagramGroups.values());
     }
 
-    private char[] getCountsOfCharacters(String str) {
+    private static char[] getCountsOfCharacters(String str) {
         char[] countsOfCharactersArray = new char[26];
         for (char currentCharacter : str.toCharArray()) {
             int indexOfCharacterCount = currentCharacter - 'a';
