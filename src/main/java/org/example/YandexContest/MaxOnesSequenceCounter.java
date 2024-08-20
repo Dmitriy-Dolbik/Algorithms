@@ -18,22 +18,30 @@ import java.io.InputStreamReader;
  */
 public class MaxOnesSequenceCounter {
     public static void main(String args[]) throws Exception {
+        //Идея:
+        //Мы считаываем число строк
+        //В цикле считываем значения строк (0 или 1)
+        //Если это 1, то увеличиваем счетчик единиц
+        //Если это 0, то записисываем сетчик в другую переменную
+        // (если её значнние меньше текущего значения счетчика) и обнуляем счетчик
+        //И так повторяем цикл
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int countOfLinesWithOneOrZero = Integer.parseInt(br.readLine());
-        int maxOnesSequanceSize = 0;
-        int onesSequanceSize = 0;
+        int maxOnesSequenceSize = 0;
+        int onesSequenceSize = 0;
         for (int i = 0; i < countOfLinesWithOneOrZero; i++) {
             int contentLine = Integer.parseInt(br.readLine());
             if (contentLine == 1) {
-                onesSequanceSize++;
+                onesSequenceSize++;
             }
             if (contentLine == 0 || i == countOfLinesWithOneOrZero - 1) {
-                if (maxOnesSequanceSize < onesSequanceSize) {
-                    maxOnesSequanceSize = onesSequanceSize;
+                if (maxOnesSequenceSize < onesSequenceSize) {
+                    maxOnesSequenceSize = onesSequenceSize;
                 }
-                onesSequanceSize = 0;
+                onesSequenceSize = 0;
             }
         }
-        System.out.println(maxOnesSequanceSize);
+        System.out.println(maxOnesSequenceSize);
     }
 }

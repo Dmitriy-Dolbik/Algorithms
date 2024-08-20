@@ -25,6 +25,12 @@ public class DuplicateRemover {
     private static BufferedWriter bufferedWriter;
     private static final int MAX_CHAR_ARRAY_SIZE = 15;
 
+    //Идея: Считываем первое число - это количество следующих строк
+    //Считываем первое число и записываем в файл
+    //Сохраняем его в переменную, как предыдущее значение
+    //Проблегаем в цикле по всем оставшимся числам, считываем их,
+    //Сравниваем с предыдущим числом, если не равны, то записываем в файл
+
     public static void main(String[] args) throws Exception {
         init();
         run();

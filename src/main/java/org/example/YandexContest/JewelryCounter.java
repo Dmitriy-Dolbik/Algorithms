@@ -17,6 +17,11 @@ import java.io.InputStreamReader;
  */
 public class JewelryCounter {
     public static void main(String[] args) throws IOException {
+        //Идея: нам нужно проверить, что символ в одной строке, присутствует во второй строке.
+        //Если это так. то увеличиваем счетчик на 1.
+        //Провреить, что символ есть в строке можно с помощью метода indexOf(),
+        //который возвращает индекс первого встречания символа в строке.
+        //если симвода в строке нет, вернется -1.
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String jLine = br.readLine();

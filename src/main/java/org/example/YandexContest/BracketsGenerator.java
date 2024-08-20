@@ -24,6 +24,8 @@ import java.util.Arrays;
  * [(, (, ), ), (, )]
  * [(, ), (, (, ), )]
  * [(, ), (, ), (, )]
+ *
+ * https://contest.yandex.ru/contest/8458/problems/D/
  */
 public class BracketsGenerator {
     public static final String FILE_INPUT = "input.txt";
@@ -50,6 +52,15 @@ public class BracketsGenerator {
         bufferedWriter.close();
     }
 
+    //Идея:
+    //Считываем из файла количество скобок.
+    //Если 3,то ((()))
+    //Формируем самую маленькую скобочную последовательность ((()))
+    //и записываем её
+    //находим индекс самой правой открывающей скобки справа, чтобы заменить её на закрывающую
+    //заменяем её
+    //меняем все оставшиеся справа скобки так, чтобы всего было 3 открывающих и 3 закрывающих скобки
+    //записываем их
     private static void run() throws IOException {
         int halfBracketsNumber = Integer.parseInt(String.valueOf(readLine()).trim());
         int bracketsNumber = halfBracketsNumber * 2;
