@@ -3,7 +3,12 @@ package org.example.leetcode.ArraysHashing;
 import org.example.leetcode.Task;
 
 public class ProductOfArrayExceptSelf implements Task {
-    public int[] productExceptSelf(int[] nums) {
+
+    public static void main(String[] args) {
+        productExceptSelf(new int[]{2, 4, 5, 6});
+    }
+
+    public static int[] productExceptSelf(int[] nums) {
         int[] result = new int[nums.length];
 
         //Идем слева на права и заполняем массив
