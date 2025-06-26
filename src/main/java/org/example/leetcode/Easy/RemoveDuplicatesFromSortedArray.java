@@ -43,11 +43,11 @@ public class RemoveDuplicatesFromSortedArray implements Task {
 
     @Override
     public String getTimeComplexity() {
-        return "";
+        return "O(n)"; //Т.к. мы один раз проходимся по элементам массива
     }
 
     @Override
     public String getSpaceComplexity() {
-        return "";
+        return "О(1)";//т.к. мы используем только дополнительные переменные
     }
 }
