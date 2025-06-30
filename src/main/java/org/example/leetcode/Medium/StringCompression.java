@@ -5,9 +5,6 @@ import org.example.leetcode.Task;
 public class StringCompression implements Task {
 
     public static int compress(char[] chars) {
-        if (chars.length == 1) {
-            return 1;
-        }
         int indexOfCompressedArray = 0;
         for (int i = 0; i < chars.length; i++) {
             char letter = chars[i];
@@ -46,9 +43,6 @@ public class StringCompression implements Task {
     @Override
     public void getOptimizeSolution() {
 //        public static int compress(char[] chars) {
-//            if (chars.length == 1) {
-//                return 1;
-//            }
 //            int indexOfCompressedArray = 0;
 //            for (int i = 0; i < chars.length;) {
 //                char letter = chars[i];
