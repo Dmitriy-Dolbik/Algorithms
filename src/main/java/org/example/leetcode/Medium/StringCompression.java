@@ -8,29 +8,25 @@ public class StringCompression implements Task {
         if (chars.length == 1) {
             return 1;
         }
-        int countOfCharacters = 0;
-        int indexOfLastCount = -1;
-        int sameCharCount = 1;
-        for (int i = 0; i < chars.length - 1; i++) {
-            char current = chars[i];
-            char next = chars[i + 1];
-            if (current == next) {
-                sameCharCount++;
-            } else if (sameCharCount != 1) {
-                chars[indexOfLastCount + 2] = (char) (sameCharCount + '0');
-                indexOfLastCount += 2;
-                countOfCharacters++;
-                sameCharCount = 1;
-            } else {
-                indexOfLastCount += 1;
-                countOfCharacters++;
+        int indexOfCompressedArray = 0;
+        for (int i = 0; i < chars.length; i++) {
+            char letter = chars[i];
+            int countOfConsecutiveChar = 0;
+
+            while (i < chars.length && letter == chars[i]) {
+                countOfConsecutiveChar++;
+                i++;
+            }
+
+            chars[indexOfCompressedArray++] = letter;
+
+            if (countOfConsecutiveChar > 1) {
+                for (char countChar : String.valueOf(countOfConsecutiveChar).toCharArray()) {
+                    chars[indexOfCompressedArray++] = countChar;
+                }
             }
         }
-        if (sameCharCount > 1) {
-            chars[indexOfLastCount + 2] = (char) (sameCharCount + '0');
-            countOfCharacters++;
-        }
-        return countOfCharacters * 2;
+        return indexOfCompressedArray;
     }
 
     public static void main(String[] args) {
@@ -49,16 +45,39 @@ public class StringCompression implements Task {
 
     @Override
     public void getOptimizeSolution() {
-
+//        public static int compress(char[] chars) {
+//            if (chars.length == 1) {
+//                return 1;
+//            }
+//            int indexOfCompressedArray = 0;
+//            for (int i = 0; i < chars.length;) {
+//                char letter = chars[i];
+//                int countOfConsecutiveChar = 0;
+//
+//                while (i < chars.length && letter == chars[i]) {
+//                    countOfConsecutiveChar++;
+//                    i++;
+//                }
+//
+//                chars[indexOfCompressedArray++] = letter;
+//
+//                if (countOfConsecutiveChar > 1) {
+//                    for (char countChar : String.valueOf(countOfConsecutiveChar).toCharArray()) {
+//                        chars[indexOfCompressedArray++] = countChar;
+//                    }
+//                }
+//            }
+//            return indexOfCompressedArray;
+//        }
     }
 
     @Override
     public String getTimeComplexity() {
-        return "";
+        return "O(n)";
     }
 
     @Override
     public String getSpaceComplexity() {
-        return "";
+        return "O(1)";
     }
 }
