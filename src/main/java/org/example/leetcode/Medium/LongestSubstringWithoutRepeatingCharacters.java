@@ -2,27 +2,25 @@ package org.example.leetcode.Medium;
 
 import org.example.leetcode.Task;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 public class LongestSubstringWithoutRepeatingCharacters implements Task {
 
     public static int lengthOfLongestSubstring(String s) {
-        int n = s.length();
+        int[] charIndexesArray = new int[128];
+        Arrays.fill(charIndexesArray, -1);
         int maxLength = 0;
-        Map<Character, Integer> charMap = new HashMap<>();
         int left = 0;
 
-        for (int right = 0; right < n; right++) {
-            if (!charMap.containsKey(s.charAt(right)) || charMap.get(s.charAt(right)) < left) {
-                charMap.put(s.charAt(right), right);
+        for (int right = 0; right < s.length(); right++) {
+            int currentChar = s.charAt(right);
+            if (charIndexesArray[currentChar] < left) {
                 maxLength = Math.max(maxLength, right - left + 1);
             } else {
-                left = charMap.get(s.charAt(right)) + 1;
-                charMap.put(s.charAt(right), right);
+                left = charIndexesArray[currentChar] + 1;
             }
+            charIndexesArray[currentChar] = right;
         }
-
         return maxLength;
     }
 
@@ -53,23 +51,40 @@ public class LongestSubstringWithoutRepeatingCharacters implements Task {
 //            maxSubseqCount = Math.max(maxSubseqCount, charSet.size());
 //            return maxSubseqCount;
 //        }
-        //Second optima solution via Map
+        //Second optimal solution via Map
 //        public static int lengthOfLongestSubstring(String s) {
-//            int n = s.length();
-//            int maxLength = 0;
-//            Map<Character, Integer> charMap = new HashMap<>();
+//            Map<Character, Integer> map = new HashMap<>();
 //            int left = 0;
+//            int maxLength = 0;
 //
-//            for (int right = 0; right < n; right++) {
-//                if (!charMap.containsKey(s.charAt(right)) || charMap.get(s.charAt(right)) < left) {
-//                    charMap.put(s.charAt(right), right);
+//            for (int right = 0; right < s.length(); right++) {
+//                char currentChar = s.charAt(right);
+//                if (!map.containsKey(currentChar) || map.get(currentChar) < left) {
 //                    maxLength = Math.max(maxLength, right - left + 1);
 //                } else {
-//                    left = charMap.get(s.charAt(right)) + 1;
-//                    charMap.put(s.charAt(right), right);
+//                    left = map.get(currentChar) + 1;
 //                }
+//                map.put(currentChar, right);
 //            }
+//            return maxLength;
+//        }
+//        }
+//        Third optimal solution via int array
+//        public static int lengthOfLongestSubstring(String s) {
+//            int[] charIndexesArray = new int[128];
+//            Arrays.fill(charIndexesArray, -1);
+//            int maxLength = 0;
+//            int left = 0;
 //
+//            for (int right = 0; right < s.length(); right++) {
+//                int currentChar = s.charAt(right);
+//                if (charIndexesArray[currentChar] < left) {
+//                    maxLength = Math.max(maxLength, right - left + 1);
+//                } else {
+//                    left = charIndexesArray[currentChar] + 1;
+//                }
+//                charIndexesArray[currentChar] = right;
+//            }
 //            return maxLength;
 //        }
     }
