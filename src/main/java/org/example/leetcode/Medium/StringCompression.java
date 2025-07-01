@@ -2,6 +2,8 @@ package org.example.leetcode.Medium;
 
 import org.example.leetcode.Task;
 
+import java.util.HashSet;
+
 public class StringCompression implements Task {
 
     public static int compress(char[] chars) {
