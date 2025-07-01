@@ -101,6 +101,6 @@ public class LongestSubstringWithoutRepeatingCharacters implements Task {
 
     @Override
     public String getSpaceComplexity() {
-        return "O(1)";
+        return " O(k), где k - количество уникальных символов";
     }
 }
